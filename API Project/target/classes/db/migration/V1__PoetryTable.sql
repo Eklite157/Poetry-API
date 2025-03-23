@@ -1,0 +1,6 @@
+CREATE TABLE poetry (
+    id UUID NOT NULL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    poet VARCHAR(100) NOT NULL,
+    poemText VARCHAR(100) NOT NULL
+);
