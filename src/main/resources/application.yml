@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/poems_db
+    username: celine
+
+jpa:
+  hibernate:
+    ddl-auto: validate
