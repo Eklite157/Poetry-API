@@ -12,7 +12,6 @@ import java.util.Optional;
 @Service
 public class PoemService {
 
-    //not instantiated yet
     private final DataAccessService dataAccessService ;
 
     //constructor
@@ -22,7 +21,6 @@ public class PoemService {
     }
 
     //method
-    //Business layer, so included the check to ensure added poem does not already exist
     public int addPoem (Poem poem) {
 
         //insertPoem already returns an int

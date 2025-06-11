@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import com.example.Poetry_API.model.Poem;
 
-//this interface allows you to inherit methods from JpaRepository like save(), findById() etc.
+//this interface allows method inheritance from JpaRepository like save(), findById() etc.
 @Repository
 public interface PoemRepository extends JpaRepository<Poem, Integer> {
 
