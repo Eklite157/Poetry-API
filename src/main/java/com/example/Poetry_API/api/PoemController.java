@@ -28,14 +28,14 @@ public class PoemController {
 
     //methods
     @PostMapping //marks 'POST'
-    public ResponseEntity<String> addPoem(@Valid @NonNull @RequestBody Poem poem) {
-        int result = poemService.addPoem(poem); //returns the ID of inserted poem
+    public ResponseEntity<?> addPoem(@Valid @NonNull @RequestBody Poem poem) {
+        Poem addedPoem = poemService.addPoem(poem); //returns the ID of inserted poem
 
-        if (result == 0) {
+        if (addedPoem == null) {
             return ResponseEntity.status(409).body("Null or Duplicate"); //Conflict
-        } else {
-            return ResponseEntity.status(201).body("Created poem with ID: " + result); // 201 Created + Poem ID
         }
+
+        return ResponseEntity.status(201).body(addedPoem); //poem created
     }
 
 

@@ -23,23 +23,23 @@ public class DataAccessService {
 
 
     //methods
-    public int insertPoem (String title, String poet, String dynasty, String content) {
+    public Poem insertPoem (String title, String poet, String dynasty, String content) {
 
         // Reject null or blank title/content
         if ( isBlank(title) || isBlank(poet)  || (isBlank(content))) {
             System.out.println("Title author and content are required.");
-            return 0; // Do nothing
+            return null; // Handle null in Controller layer
         }
 
         // Reject duplicates
         if (poemRepository.existsByTitleAndContent(title, content)) {
             System.out.println("Poem already exists!");
-            return 0;
+            return null;
         }
 
         Poem newPoem = new Poem(title, poet, dynasty, content);
         Poem savedPoem = poemRepository.save(newPoem);
-        return savedPoem.getId(); // return generated DB ID
+        return savedPoem; // return newly added poem
     }
 
 

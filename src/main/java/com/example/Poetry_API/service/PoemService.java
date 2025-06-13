@@ -21,7 +21,7 @@ public class PoemService {
     }
 
     //method
-    public int addPoem (Poem poem) {
+    public Poem addPoem (Poem poem) {
 
         //insertPoem already returns an int
         return dataAccessService.insertPoem(
