@@ -71,14 +71,10 @@ public class PoemController {
 
 
     @PutMapping(path = "{id}")
-    public ResponseEntity<Void> updatePoemById (@PathVariable("id") int id, @Valid @NonNull @RequestBody Poem newPoem) {
-        int result = poemService.updatePoemById(id, newPoem); //performs the task
+    public ResponseEntity<Poem> updatePoemById (@PathVariable("id") int id, @Valid @NonNull @RequestBody Poem updatedPoem) {
+        Poem savedPoem = poemService.updatePoemById(id, updatedPoem); //performs the task
 
-        if (result == 1) {
-            return ResponseEntity.noContent().build(); // 204 = success
-        } else {
-            return ResponseEntity.notFound().build();  // 404 Not Found
-        }
+        return ResponseEntity.ok(savedPoem); //send JSON of updated poem back
     }
 
 

@@ -64,21 +64,24 @@ public class DataAccessService {
     }
 
 
-    public int updatePoemById (int id, Poem poem) {
-        Optional<Poem> result = poemRepository.findById(id);
+    public Poem updatePoemById (int id, Poem poem) {
+        //find the poem in database
+        Optional<Poem> poemToUpdate = poemRepository.findById(id);
 
-        if (result.isEmpty()) {
-            return 0;
+        if (poemToUpdate.isEmpty()) {
+            return null;
         }
 
-        Poem selectedPoem = result.get();
+        //obtain Java object
+        Poem selectedPoem = poemToUpdate.get();
 
+        //now update the poem
         selectedPoem.setTitle(poem.getTitle());
         selectedPoem.setPoet(poem.getPoet());
         selectedPoem.setDynasty(poem.getDynasty());
         selectedPoem.setContent(poem.getContent());
 
         poemRepository.save(selectedPoem);
-        return 1;
+        return selectedPoem;
     }
 }

@@ -44,7 +44,7 @@ public class PoemService {
         return dataAccessService.deletePoemById(id);
     }
 
-    public int updatePoemById(int id, Poem poem) {
+    public Poem updatePoemById(int id, Poem poem) {
         return dataAccessService.updatePoemById(id, poem);
     }
 }

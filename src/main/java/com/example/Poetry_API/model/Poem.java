@@ -3,14 +3,14 @@ package com.example.Poetry_API.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
-@Entity //mark as model
+@Entity //mark as model; maps to table and stores each row as Java Poem object
 @Table(name = "all_poems") //match existing table name
 
 //outlines the fields needed (in accordance with columns of database table)
 public class Poem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //jpa will handle id generation based on DB
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //JPA will handle id generation based on DB
     private int id;
 
     @NotBlank
