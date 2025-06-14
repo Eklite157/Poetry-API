@@ -27,6 +27,7 @@ public class PoemService {
         return dataAccessService.insertPoem(
                 poem.getTitle(),
                 poem.getPoet(),
+                poem.getPoetEn(),
                 poem.getDynasty(),
                 poem.getContent()
         );

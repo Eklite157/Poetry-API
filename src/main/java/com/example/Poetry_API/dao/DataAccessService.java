@@ -23,10 +23,10 @@ public class DataAccessService {
 
 
     //methods
-    public Poem insertPoem (String title, String poet, String dynasty, String content) {
+    public Poem insertPoem (String title, String poet, String poet_en, String dynasty, String content) {
 
         // Reject null or blank title/content
-        if ( isBlank(title) || isBlank(poet)  || (isBlank(content))) {
+        if ( isBlank(title) || isBlank(poet)  || isBlank(poet_en) || (isBlank(content))) {
             System.out.println("Title author and content are required.");
             return null; // Handle null in Controller layer
         }
@@ -37,7 +37,7 @@ public class DataAccessService {
             return null;
         }
 
-        Poem newPoem = new Poem(title, poet, dynasty, content);
+        Poem newPoem = new Poem(title, poet, poet_en, dynasty, content);
         Poem savedPoem = poemRepository.save(newPoem);
         return savedPoem; // return newly added poem
     }
@@ -78,6 +78,7 @@ public class DataAccessService {
         //now update the poem
         selectedPoem.setTitle(poem.getTitle());
         selectedPoem.setPoet(poem.getPoet());
+        selectedPoem.setPoetEn(poem.getPoetEn());
         selectedPoem.setDynasty(poem.getDynasty());
         selectedPoem.setContent(poem.getContent());
 

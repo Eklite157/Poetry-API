@@ -2,6 +2,7 @@ package com.example.Poetry_API.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity //mark as model; maps to table and stores each row as Java Poem object
 @Table(name = "all_poems") //match existing table name
@@ -17,14 +18,17 @@ public class Poem {
     private String title;
     @NotBlank
     private String poet;
+    @NotBlank
+    private String poet_en;
     private String dynasty;
     @NotBlank
     private String content;
 
     //constructor allowing other classes to create and use Poem objects
-    public Poem (String title, String poet, String dynasty, String content){
+    public Poem (String title, String poet, String poet_en, String dynasty, String content){
         this.title = title;
         this.poet = poet;
+        this.poet_en = poet_en;
         this.dynasty = dynasty;
         this.content = content;
     }
@@ -57,6 +61,17 @@ public class Poem {
 
     public void setPoet(String poet) {
         this.poet = poet;
+    }
+
+    //Jackson automatically infers property names by removing get prefix
+    //need to tell Jackson what json key maps to this field, since different (poetEn vs poet_en)
+    @JsonProperty("poet_en")
+    public String getPoetEn() {
+        return poet_en;
+    }
+
+    public void setPoetEn(String poet_en) {
+        this.poet_en = poet_en;
     }
 
     public String getDynasty() {

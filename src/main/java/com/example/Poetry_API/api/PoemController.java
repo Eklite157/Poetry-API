@@ -27,7 +27,7 @@ public class PoemController {
     }
 
     //methods
-    @PostMapping //marks 'POST'
+    @PostMapping //maps HTTP 'POST' to following method
     public ResponseEntity<?> addPoem(@Valid @NonNull @RequestBody Poem poem) {
         Poem addedPoem = poemService.addPoem(poem); //returns the ID of inserted poem
 
