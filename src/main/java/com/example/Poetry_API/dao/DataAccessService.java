@@ -17,19 +17,13 @@ public class DataAccessService {
         this.poemRepository = poemRepository;
     }
 
-    private boolean isBlank(String s) {
-        return s == null || s.trim().isEmpty();
-    }
-
 
     //methods
     public Poem insertPoem (String title, String poet, String poet_en, String dynasty, String content) {
 
-        // Reject null or blank title/content
-        if ( isBlank(title) || isBlank(poet)  || isBlank(poet_en) || (isBlank(content))) {
-            System.out.println("Title author and content are required.");
-            return null; // Handle null in Controller layer
-        }
+        //if any mandatory fields are empty, Spring @NotBlank already checks from the start, so
+        //that validation is not necessary here
+
 
         // Reject duplicates
         if (poemRepository.existsByTitleAndContent(title, content)) {
@@ -68,9 +62,18 @@ public class DataAccessService {
         //find the poem in database
         Optional<Poem> poemToUpdate = poemRepository.findById(id);
 
+        //if poem doesn't exist
         if (poemToUpdate.isEmpty()) {
             return null;
         }
+
+        //if updated title or content is a duplicate of another poem in database
+        if (poemRepository.existsByTitleAndContentAndIdNot(poem.getTitle(),poem.getContent(),id)) {
+            return null;
+        }
+
+        //if any mandatory fields are empty, Spring @NotBlank already checks from the start, so
+        //that validation is not necessary here
 
         //obtain Java object
         Poem selectedPoem = poemToUpdate.get();

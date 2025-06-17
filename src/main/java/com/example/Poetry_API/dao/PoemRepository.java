@@ -10,8 +10,13 @@ public interface PoemRepository extends JpaRepository<Poem, Integer> {
 
     //all CRUD methods from DataAccessService are already included in JpaRepository
 
-    //additional custom methods
+    //additional custom methods:
+
+    //For adding poems
     boolean existsByTitleAndContent(String title, String content);
     //generates 'SELECT COUNT(*) > 0 FROM poem WHERE title = ? AND content = ?'
 
+    //For updating poems
+    boolean existsByTitleAndContentAndIdNot(String title, String content, int id);
+    //generates 'SELECT COUNT(*) > 0 FROM poem WHERE title = ? AND content = ? AND id<>?'
 }

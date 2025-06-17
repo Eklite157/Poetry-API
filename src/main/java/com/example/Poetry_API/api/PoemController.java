@@ -5,7 +5,6 @@ import com.example.Poetry_API.service.PoemService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,11 +27,14 @@ public class PoemController {
 
     //methods
     @PostMapping //maps HTTP 'POST' to following method
-    public ResponseEntity<?> addPoem(@Valid @NonNull @RequestBody Poem poem) {
+    public ResponseEntity<?> addPoem(@Valid @RequestBody Poem poem) {
         Poem addedPoem = poemService.addPoem(poem); //returns the ID of inserted poem
 
+        //Spring handles the mandatory non-null field validations
+
+        //handle duplicate
         if (addedPoem == null) {
-            return ResponseEntity.status(409).body("Null or Duplicate"); //Conflict
+            return ResponseEntity.status(409).body("Attempting to add duplicate poem!");
         }
 
         return ResponseEntity.status(201).body(addedPoem); //poem created
@@ -71,11 +73,18 @@ public class PoemController {
 
 
     @PutMapping(path = "{id}")
-    public ResponseEntity<Poem> updatePoemById (@PathVariable("id") int id, @Valid @NonNull @RequestBody Poem updatedPoem) {
+    public ResponseEntity<?> updatePoemById (@PathVariable("id") int id, @Valid @RequestBody Poem updatedPoem) {
+
         Poem savedPoem = poemService.updatePoemById(id, updatedPoem); //performs the task
+
+        //Spring handles the mandatory non-null field validations
+
+        //handle duplicate
+        if (poemService.updatePoemById(id, updatedPoem) == null) {
+            return ResponseEntity.status(409).body("Updated poem is a duplicate!");
+        }
 
         return ResponseEntity.ok(savedPoem); //send JSON of updated poem back
     }
-
 
 }
