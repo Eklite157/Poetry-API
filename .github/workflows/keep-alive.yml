@@ -9,4 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping Spring Boot health endpoint to touch DB
-        run: curl -I https://poetry-api-1.onrender.com/api/v1/poem/api/v1/poem/health
+        run: curl -I https://poetry-api-1.onrender.com/api/v1/poem/health
