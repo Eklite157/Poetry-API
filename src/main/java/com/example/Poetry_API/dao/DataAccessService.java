@@ -88,4 +88,9 @@ public class DataAccessService {
         poemRepository.save(selectedPoem);
         return selectedPoem;
     }
+
+    public boolean isDBAlive() {
+        return poemRepository.findFirstBy().isPresent();
+    }
+
 }

@@ -48,4 +48,8 @@ public class PoemService {
     public Poem updatePoemById(int id, Poem poem) {
         return dataAccessService.updatePoemById(id, poem);
     }
+
+    public boolean isDBAlive() {
+        return dataAccessService.isDBAlive();
+    }
 }

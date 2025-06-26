@@ -87,4 +87,9 @@ public class PoemController {
         return ResponseEntity.ok(savedPoem); //send JSON of updated poem back
     }
 
+    @GetMapping("/api/v1/poem/health")
+    public ResponseEntity<String> healthCheck() {
+        boolean dbAlive = poemService.isDBAlive();
+        return ResponseEntity.ok("Supabase DB alive: " + dbAlive);
+    }
 }
