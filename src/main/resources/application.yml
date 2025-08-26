@@ -10,3 +10,5 @@ jpa:
 
 server:
   port: ${PORT:8080}
+
+apiKey: ${API_KEY}

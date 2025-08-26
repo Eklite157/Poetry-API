@@ -3,6 +3,7 @@ package com.example.Poetry_API.api;
 import com.example.Poetry_API.model.Poem;
 import com.example.Poetry_API.service.PoemService;
 import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -65,9 +66,9 @@ public class PoemController {
         int result = poemService.deletePoemById(id); //performs the task
 
         if (result == 1) {
-            return ResponseEntity.noContent().build(); // 204 = success
+            return ResponseEntity.noContent().build(); //204 = success
         } else {
-            return ResponseEntity.notFound().build();  // 404 Not Found
+            return ResponseEntity.notFound().build();  //404 Not Found
         }
     }
 
@@ -86,6 +87,20 @@ public class PoemController {
 
         return ResponseEntity.ok(savedPoem); //send JSON of updated poem back
     }
+
+
+    @PutMapping(path = "translate/{id}")
+    public ResponseEntity<Poem> translatePoemById (@PathVariable("id") int id){
+
+        Poem poem = poemService.translatePoem(id);
+
+        if (poem == null) {
+            return ResponseEntity.notFound().build(); //404 Not Found
+        }
+        return ResponseEntity.ok(poem);//200 OK
+    }
+
+
 
     @GetMapping("/health")
     public ResponseEntity<String> healthCheck() {

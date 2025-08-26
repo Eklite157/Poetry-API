@@ -23,6 +23,8 @@ public class Poem {
     private String dynasty;
     @NotBlank
     private String content;
+    //nullable
+    private String translation;
 
     //constructor allowing other classes to create and use Poem objects
     public Poem (String title, String poet, String poet_en, String dynasty, String content){
@@ -31,6 +33,7 @@ public class Poem {
         this.poet_en = poet_en;
         this.dynasty = dynasty;
         this.content = content;
+        // translation defaults to null
     }
 
     public Poem() {
@@ -89,5 +92,9 @@ public class Poem {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public String getTranslation() { return translation; }
+
+    public void setTranslation(String translation) { this.translation = translation; }
 
 }

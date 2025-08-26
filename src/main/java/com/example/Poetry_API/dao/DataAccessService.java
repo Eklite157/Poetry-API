@@ -24,7 +24,6 @@ public class DataAccessService {
         //if any mandatory fields are empty, Spring @NotBlank already checks from the start, so
         //that validation is not necessary here
 
-
         // Reject duplicates
         if (poemRepository.existsByTitleAndContent(title, content)) {
             System.out.println("Poem already exists!");
@@ -75,7 +74,7 @@ public class DataAccessService {
         //if any mandatory fields are empty, Spring @NotBlank already checks from the start, so
         //that validation is not necessary here
 
-        //obtain Java object
+        //obtain Java object if optional exists
         Poem selectedPoem = poemToUpdate.get();
 
         //now update the poem
@@ -84,6 +83,7 @@ public class DataAccessService {
         selectedPoem.setPoetEn(poem.getPoetEn());
         selectedPoem.setDynasty(poem.getDynasty());
         selectedPoem.setContent(poem.getContent());
+        selectedPoem.setTranslation(poem.getTranslation());
 
         poemRepository.save(selectedPoem);
         return selectedPoem;
